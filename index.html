@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<title>Requisições com Fetch API</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			font-family: monospace;
+		}
+		.classe {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+		.stilus {
+		    width: 373px;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    margin: 10px;
+		    padding: 20px;
+		    box-shadow: 1px 1px 5px 1px #8080807a;
+		    transition: all .5s;
+		}
+		.stilus:hover {
+            transform: scale(1.1);
+		}
+		.stilize {
+			padding: 40px 0px;
+			letter-spacing: 1px;
+			text-align: center;
+			font-size: 25px;
+		}
+		.stilize::after {
+            content:'';
+            width: 140px;
+            height: 3px;
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+            background: linear-gradient(45deg, black, transparent);
+		}
+		.contact {
+			padding: 3px 20px;
+		}
+		footer {
+		    background: linear-gradient(45deg, white, #e2e2e2);
+		    padding: 40px 10px;
+		}
+		footer h3 {
+		    letter-spacing: 1px;
+		    font-size: 14px;
+		}
+	</style>
+</head>
+<body>
+ <h2 class="stilize">Requisição em Fetch API</h2>
+ <div class="classe">
+ 	
+ </div>
+  <footer>
+  	<div class="rodape">
+  		<h3>Retornando api pelo site <a href="https://reqres.in/" target="blank" rel="nofollow">https://reqres.in/</a></h3>
+  	</div>
+  </footer>
+ <script>
+ 	let lista = document.querySelector('.classe');
+    fetch('https://reqres.in/api/users?delay=3')
+    .then(function(response){
+      return response.json()
+    })
+    .then(function(response){
+       response.data.forEach(function(user){
+       	  let ordem = document.createElement('div');
+       	  ordem.classList.add('stilus');
+          ordem.innerHTML = `<img src='${user.avatar}' alt="imagens API" title="imagens API">
+          <div class="contact">
+          <p>Nome: ${user.first_name}</p>
+          <p>Sobrenome: ${user.last_name}</p>
+          <p>Email para contato: ${user.email}</p>
+          </div>
+          `;
+       	  lista.appendChild(ordem);
+       })
+    })
+ </script>
+</body>
+</html>
